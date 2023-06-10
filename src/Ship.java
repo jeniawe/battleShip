@@ -3,31 +3,33 @@ public class Ship {
     static Scanner scanner = new Scanner(System.in);
     public static void placeShips(String playerName, int[][] battleField) {
         int deck = 4;
+        int count = 1;
         while (deck >= 1) {
-            System.out.println();
-            System.out.println(playerName + ", please place your " + deck + "-deck ship on the battleField:");
-            System.out.println();
-            Field.drawField(battleField);
-            System.out.print("Please enter OX: ");
-            int x = scanner.nextInt();
-            System.out.print("Please enter OY: ");
-            int y = scanner.nextInt();
-            System.out.println("Choose direction:");
-            System.out.println("1. Vertical.");
-            System.out.println("2. Horizontal.");
-            int direction = scanner.nextInt();
-            if (!isAvailable(x,y,deck,direction,battleField)) {
-                System.out.println("Wrong coordinates");
-                continue;
-            }
-            for (int i = 0; i < deck; i++) {
-                if (direction == 1) {
-                    battleField[x][y + i] = 1;
-                } else {
-                    battleField[x + i][y] = 1;
+            for (int t = 0; t<count; t++){
+                System.out.println();
+                Field.drawField(battleField);
+                System.out.print(playerName + ", please enter OX: ");
+                int x = scanner.nextInt();
+                System.out.print(playerName + ", please enter OY: ");
+                int y = scanner.nextInt();
+                System.out.println("Choose direction:");
+                System.out.println("1. Vertical.");
+                System.out.println("2. Horizontal.");
+                int direction = scanner.nextInt();
+                if (!isAvailable(x, y, deck, direction, battleField)) {
+                    System.out.println("Wrong coordinates");
+                    continue;
+                }
+                for (int i = 0; i < deck; i++) {
+                    if (direction == 1) {
+                        battleField[x][y + i] = 1;
+                    } else {
+                        battleField[x + i][y] = 1;
 
+                    }
                 }
             }
+            count++;
             deck--;
         }
     }
